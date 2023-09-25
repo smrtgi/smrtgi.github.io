@@ -55,7 +55,7 @@ def process_image(image_url):
 # ChatGPT Part
 import openai
 
-openai.api_key = "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"
+openai.api_key = "input_your_key"
 messages = [{"role": "system", "content": "You are a intelligent assistant."}]
 
 def chat_with_gpt(input_text):
