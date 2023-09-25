@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
+    <title>Image Processing</title>
+        <style>
+        body {
+          background-image: url('static/bg.jpg');
+          background-repeat: no-repeat;
+          background-attachment: fixed;
+          background-size: cover;
+        }
+    </style>
+</head>
+<body>
+   <h1>Cat Detector</h1>
+   <div class="container">
+       <div class="form-container">
+           <form action="/img" method="post">
+               <fieldset>
+                   <label for="url">Input URL</label><br>
+                   <h2>The image will be processed using our YOLO model to detect cats</h2><br>
+                   <input type="text" id="url" name="url" placeholder="Enter URL"><br><br>
+                   <input type="submit" value="Process Image">
+               </fieldset>
+           </form>
+       </div>
+       <div class="image-container">
+           <!-- Display the image from YOLO -->
+            {% if results %}
+                <img src="{{ results }}" alt="YOLO Image Path Not Found" class="custom-image">
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        var textBox = document.getElementById("textbox");
+                        textBox.style.display = "block";
+                    });
+                </script>
+            {% endif %}
+       </div>
+   </div>
+
+    <!-- The textbox that will be hidden initially -->
+   <div class="chat" id="textbox" style="display:none;">
+       <form action="/chat" method="POST">
+           <label for="chat">Ask ChatGPT</label><br>
+           <input type="text" id="chat" name="chat" placeholder="Send a message">
+           <input type="submit" value="Submit Response">
+       </form>
+       <p id="retOp"><b>Form submit successful</b></p>
+{#       {% if reply %}#}
+{#           <h1>Ask ChatGPT</h1>#}
+{#           <p>User: {{ user }}</p>#}
+{#           <p>{{ reply }}</p>#}
+{#       {% endif %}#}
+   </div>
+   <div class="chat">
+       {% if reply %}
+           <label>Ask ChatGPT</label><br>
+           <p>User: {{ user }}</p>
+           <p>{{ reply }}</p>
+       {% endif %}
+   </div>
+{##}
+{#    <script>#}
+{#        function submitFormReturn() {#}
+{#            var retForm = document.getElementById("textbox");#}
+{#            var retOp = document.getElementById("retOp");#}
+{##}
+{#            retForm.style.display = "none";#}
+{#            retOp.innerHTML = "<b>Form submit successful</b>";#}
+{##}
+{#            // You may also want to send an AJAX request here to process the form data.#}
+{#            // This will prevent a page refresh.#}
+{##}
+{#            return false; // Prevent the default form submission#}
+{#        }#}
+{#   </script>#}
+
+
+</body>
+</html>
